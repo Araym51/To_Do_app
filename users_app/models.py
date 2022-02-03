@@ -2,9 +2,10 @@ from django.db import models
 
 # Create your models here.
 
-from django.contrib.auth.models import AbstractBaseUser
+from django.contrib.auth.models import AbstractUser ,AbstractBaseUser
 from django.db import models
 
 
-class Users(AbstractBaseUser):
-    email = models.EmailField(verbose_name='e-mail', unique=True, null=False)
+class Users(AbstractUser):
+    # username = models.CharField(verbose_name='Логин пользователя',max_length=150, unique=True)
+    email = models.EmailField(unique=True)

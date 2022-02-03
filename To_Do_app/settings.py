@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+import users_app.models
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -72,6 +74,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'To_Do_app.wsgi.application'
 
+AUTH_USER_MODEL = 'users_app.Users'
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
