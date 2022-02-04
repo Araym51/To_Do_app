@@ -23,7 +23,7 @@ router = DefaultRouter()
 router.register('users_app', UsersModelViewSet)
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls), # подключена админка
     path('api-auth/', include('rest_framework.urls')),
     path('api/', include(router.urls)),
 ]

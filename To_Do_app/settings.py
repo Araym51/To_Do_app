@@ -39,7 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # подключенные библиотеки
     'rest_framework',
+    # мои приложения
     'users_app',
 ]
 
@@ -74,7 +76,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'To_Do_app.wsgi.application'
 
-AUTH_USER_MODEL = 'users_app.Users'
+AUTH_USER_MODEL = 'users_app.Users'  # тут указана модель, по которой будет происходить авторизация
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases

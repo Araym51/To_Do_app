@@ -5,5 +5,5 @@ from .serializers import UsersModelSerializer
 
 
 class UsersModelViewSet(ModelViewSet):
-    queryset = Users.objects.all()
-    serializer_class = UsersModelSerializer
+    queryset = Users.objects.all() # выбираем все объекты из БД Users
+    serializer_class = UsersModelSerializer # показываем, каким сериализатором отдаем всё наружу
