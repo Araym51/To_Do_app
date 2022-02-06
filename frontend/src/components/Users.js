@@ -1,19 +1,19 @@
 import React from "react";
 
-const UsersItem = ({users}) => {
+const UsersItem = ({users_app}) => {
     return (
         <tr>
             <td>
-                {users.username}
+                {users_app.username}
             </td>
             <td>
-                {users.email}
+                {users_app.email}
             </td>
             <td>
-                {users.first_name}
+                {users_app.first_name}
             </td>
             <td>
-                {users.last_name}
+                {users_app.last_name}
             </td>
         </tr>
     )
@@ -23,18 +23,18 @@ const UsersList = ({users_list}) => {
     return (
         <table>
             <th>
-                User name
+                | User name |
             </th>
             <th>
-                User email
+                | User email |
             </th>
             <th>
-                User first name
+                | User first name|
             </th>
             <th>
-                User last name
+                | User last name |
             </th>
-            {users_list.map((users) => <UsersItem users={users} />)}
+            {users_list.map((users_app) => <UsersItem users_app={users_app} />)}
         </table>
     )
 }
