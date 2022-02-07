@@ -40,5 +40,3 @@ const UsersList = ({users_list}) => {
 }
 
 export default UsersList
-
-

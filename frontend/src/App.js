@@ -1,8 +1,9 @@
 // import logo from './logo.svg';
-import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import React from "react";
 import UsersList from "./components/Users";
 import axios from "axios";
+import {NaviBar} from "./components/Navibar";
 
 class App extends React.Component {
     constructor(props) {
@@ -11,6 +12,7 @@ class App extends React.Component {
             'users_list': []
         }
     }
+
 
     componentDidMount() {
         // const users_app = [
@@ -33,18 +35,19 @@ class App extends React.Component {
         //     }
         // )
         axios.get('http://127.0.0.1:8000/api/users_app/').then(response => {
-                const users_list = response.data
-                this.setState(
-                    {
-                        'users_list': response.data
-                    }
-                )
-            }).catch(error => console.log(error))
+            const users_list = response.data
+            this.setState(
+                {
+                    'users_list': response.data
+                }
+            )
+        }).catch(error => console.log(error))
     }
 
     render() {
         return (
             <div>
+                <NaviBar/>
                 <UsersList users_list={this.state.users_list}/>
             </div>
         )
