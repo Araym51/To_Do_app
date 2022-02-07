@@ -1,10 +1,12 @@
 // import logo from './logo.svg';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from "react";
-import UsersList from "./components/Users";
 import axios from "axios";
+// my apps:
+import UsersList from "./components/Users";
 import {NaviBar} from "./components/Navibar";
-import Card, {CardHeader} from "./components/Header";
+import {Footer} from "./components/Footer";
+
 
 class App extends React.Component {
     constructor(props) {
@@ -13,7 +15,6 @@ class App extends React.Component {
             'users_list': []
         }
     }
-
 
     componentDidMount() {
         // const users_app = [
@@ -35,6 +36,8 @@ class App extends React.Component {
         //         'users_app': users_app
         //     }
         // )
+
+        // собираем данные с бэк энда:
         axios.get('http://127.0.0.1:8000/api/users_app/').then(response => {
             const users_list = response.data
             this.setState(
@@ -48,12 +51,11 @@ class App extends React.Component {
     render() {
         return (
             <div>
-                {/*<CardHeader/>*/}
                 <NaviBar/>
                 <UsersList users_list={this.state.users_list}/>
+                <Footer/>
             </div>
         )
-
     }
 }
 

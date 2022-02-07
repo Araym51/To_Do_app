@@ -1,6 +1,7 @@
 import React from "react";
 import {Table} from "react-bootstrap";
 
+// собираем данные с api:
 const UsersItem = ({users_app}) => {
     return (
         <tr>
@@ -20,23 +21,24 @@ const UsersItem = ({users_app}) => {
     )
 }
 
+// формируем таблицу:
 const UsersList = ({users_list}) => {
     return (
-        <Table striped bordered hover size="sm">
-            <th>
-                User name
-            </th>
-            <th>
-                User email
-            </th>
-            <th>
-                User first name
-            </th>
-            <th>
-                User last name
-            </th>
-            {users_list.map((users_app) => <UsersItem users_app={users_app}/>)}
-        </Table>
+            <Table striped bordered hover size="sm">
+                <th>
+                    User name
+                </th>
+                <th>
+                    User email
+                </th>
+                <th>
+                    User first name
+                </th>
+                <th>
+                    User last name
+                </th>
+                {users_list.map((users_app) => <UsersItem users_app={users_app}/>)}
+            </Table>
     )
 }
 
