@@ -4,6 +4,7 @@ import React from "react";
 import UsersList from "./components/Users";
 import axios from "axios";
 import {NaviBar} from "./components/Navibar";
+import Card, {CardHeader} from "./components/Header";
 
 class App extends React.Component {
     constructor(props) {
@@ -47,6 +48,7 @@ class App extends React.Component {
     render() {
         return (
             <div>
+                {/*<CardHeader/>*/}
                 <NaviBar/>
                 <UsersList users_list={this.state.users_list}/>
             </div>

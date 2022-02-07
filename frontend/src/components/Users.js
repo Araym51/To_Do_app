@@ -1,4 +1,5 @@
 import React from "react";
+import {Table} from "react-bootstrap";
 
 const UsersItem = ({users_app}) => {
     return (
@@ -21,21 +22,21 @@ const UsersItem = ({users_app}) => {
 
 const UsersList = ({users_list}) => {
     return (
-        <table>
+        <Table striped bordered hover size="sm">
             <th>
-                | User name |
+                User name
             </th>
             <th>
-                | User email |
+                User email
             </th>
             <th>
-                | User first name|
+                User first name
             </th>
             <th>
-                | User last name |
+                User last name
             </th>
-            {users_list.map((users_app) => <UsersItem users_app={users_app} />)}
-        </table>
+            {users_list.map((users_app) => <UsersItem users_app={users_app}/>)}
+        </Table>
     )
 }
 
