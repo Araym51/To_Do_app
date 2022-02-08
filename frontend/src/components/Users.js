@@ -24,7 +24,7 @@ const UsersItem = ({users_app}) => {
 // формируем таблицу:
 const UsersList = ({users_list}) => {
     return (
-            <Table striped bordered hover size="sm">
+            <Table striped bordered hover>
                 <th>
                     User name
                 </th>

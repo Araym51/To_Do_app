@@ -9,8 +9,7 @@ export function Footer() {
                     display: "flex",
                     justifyContent: "center",
                     padding: "10px",
-                    height: "50px",
-                    scrollMarginBottom:"0px"
+                    height: "60px",
                 }}>
                     <p>To do app</p>
                 </Container>
