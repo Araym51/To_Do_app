@@ -8,6 +8,7 @@ import {NaviBar} from "./components/Navibar";
 import {Footer} from "./components/Footer";
 
 
+
 class App extends React.Component {
     constructor(props) {
         super(props)
