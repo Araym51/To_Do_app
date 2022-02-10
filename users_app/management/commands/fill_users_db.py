@@ -62,3 +62,5 @@ class Command(BaseCommand):
         for i in range(user_count):
             Users.objects.create_user(username=f'user_{i}', email=f'test_user_{i}@mail.ru', first_name=f'user_{i}_name',
                                       last_name=f'user_{i}_lastname', password=f'zaq12wsx{i}')
+
+        print('test users succefully created')
