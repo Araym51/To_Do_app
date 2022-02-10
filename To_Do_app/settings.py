@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'corsheaders', # библиотека для взаимодействия с frontend
     # мои приложения
     'users_app',
+    'projects',
 ]
 
 MIDDLEWARE = [

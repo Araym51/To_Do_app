@@ -6,8 +6,8 @@ import users_app.models
 
 class Project(models.Model):
     project = models.CharField(verbose_name='Название проекта', max_length=128)
-    git_link = models.CharField(verbose_name='Ссылка на git' ,max_length=128)
-    users = models.ForeignKey(users_app.models.Users, on_delete=models.CASCADE) #on_delete=models.CASCADE надо ли?
+    git_link = models.URLField(verbose_name='Ссылка на git')
+    users = models.ForeignKey(users_app.models.Users, on_delete=models.CASCADE)
 
 
 class To_do(models.Model):
