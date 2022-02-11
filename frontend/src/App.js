@@ -39,7 +39,7 @@ class App extends React.Component {
         // )
 
         // собираем данные с бэк энда:
-        axios.get('http://127.0.0.1:8000/api/users_app/').then(response => {
+        axios.get('http://127.0.0.1:8000/api/users/').then(response => {
             const users_list = response.data
             this.setState(
                 {
