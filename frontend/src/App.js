@@ -7,7 +7,8 @@ import UsersList from "./components/Users";
 import {NaviBar} from "./components/Navibar";
 import {Footer} from "./components/Footer";
 
-
+const DOMAIN = 'http://127.0.0.1:8000/api/'
+const get_url = () => `${DOMAIN}${url}`
 
 class App extends React.Component {
     constructor(props) {
@@ -18,28 +19,8 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-        // const users_app = [
-        //     {
-        //         'username': 'Araym',
-        //         'email': 'araimo@yandex.ru',
-        //         'first_name': 'Egor',
-        //         'last_name': 'Ostroumov'
-        //     },
-        //     {
-        //         'username': 'Olen4ik',
-        //         'email': 'Olen4ik@yandex.ru',
-        //         'first_name': 'Lena',
-        //         'last_name': 'Ostroumova'
-        //     }
-        // ]
-        // this.setState(
-        //     {
-        //         'users_app': users_app
-        //     }
-        // )
-
         // собираем данные с бэк энда:
-        axios.get('http://127.0.0.1:8000/api/users/').then(response => {
+        axios.get(get_url('users/')).then(response => {
             const users_list = response.data
             this.setState(
                 {

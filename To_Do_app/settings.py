@@ -152,16 +152,19 @@ CORS_ALLOWED_ORIGINS = [
 # настрока renderers для всего проекта:
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
         # используется camelCase:
         'djangorestframework_camel_case.render.CamelCaseJSONRenderer',
         'djangorestframework_camel_case.render.CamelCaseBrowsableAPIRenderer',
     ),
-# используется camelCase:
-    'DEFAULT_PARSER_CLASSES': (
-        'djangorestframework_camel_case.parser.CamelCaseJSONParser',
-    ),
-    'JSON_UNDERSCOREIZE': {
-        'no_underscore_before_number': True,
-    },
+# следующие 2 настройки используются для camelCase
+# !!! ВКЛЮЧАТЬ ТОЛЬКО КОГДА НЕ НУЖНА HTML ФОРМА ДЛЯ РУЧНОГО ВНЕСЕНИЯ ДАННЫХ !!!
+#     'DEFAULT_PARSER_CLASSES': (
+#         'djangorestframework_camel_case.parser.CamelCaseJSONParser',
+#     ),
+#     'JSON_UNDERSCOREIZE': {
+#         'no_underscore_before_number': True,
+#     },
 }
 

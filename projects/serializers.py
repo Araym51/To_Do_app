@@ -2,21 +2,19 @@ from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer, HyperlinkedModelSerializer
 
 from .models import ToDo, Project
-
+from users_app.serializers import UsersModelSerializer
 
 class ProjectModelSerializer(ModelSerializer):
-
-    # users = serializers.StringRelatedField(many=True)
-
+    # users = serializers.StringRelatedField(many=True) # !ВКЛЮЧАТЬ КОГДА НЕ НУЖНО РАБОТАТЬ С HTML ФОРМОЙ!
     class Meta:
         model = Project
-        fields = ('project', 'git_link', 'users')
+        fields = ('project', 'git_link', 'is_active', 'users')
         # read_only_fields = ('users',)
 
 
 class ToDoModelSerializer(ModelSerializer):
-    # users = serializers.StringRelatedField(many=True)
-
+    # project = serializers.StringRelatedField() # !ВКЛЮЧАТЬ КОГДА НЕ НУЖНО РАБОТАТЬ С HTML ФОРМОЙ!
+    # users = UsersModelSerializer() # !ВКЛЮЧАТЬ КОГДА НЕ НУЖНО РАБОТАТЬ С HTML ФОРМОЙ!
     class Meta:
         model = ToDo
         fields = '__all__'
