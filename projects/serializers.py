@@ -5,11 +5,13 @@ from .models import ToDo, Project
 
 
 class ProjectModelSerializer(ModelSerializer):
-    users = serializers.StringRelatedField(many=True)
+
+    # users = serializers.StringRelatedField(many=True)
 
     class Meta:
         model = Project
-        fields = '__all__'
+        fields = ('project', 'git_link', 'users')
+        # read_only_fields = ('users',)
 
 
 class ToDoModelSerializer(ModelSerializer):
