@@ -16,7 +16,7 @@ class Project(models.Model):
     """
     project = models.CharField(verbose_name='Название проекта', max_length=128)
     git_link = models.URLField(verbose_name='Ссылка на git')
-    users = models.ForeignKey(users_app.models.Users, on_delete=models.CASCADE)
+    users = models.ManyToManyField(users_app.models.Users)
 
 
 class ToDo(models.Model):

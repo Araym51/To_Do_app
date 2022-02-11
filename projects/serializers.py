@@ -13,7 +13,7 @@ class ProjectModelSerializer(ModelSerializer):
 
 
 class ToDoModelSerializer(ModelSerializer):
-    users = serializers.StringRelatedField(many=True)
+    # users = serializers.StringRelatedField(many=True)
 
     class Meta:
         model = ToDo
