@@ -162,6 +162,9 @@ REST_FRAMEWORK = {
     # настройки для постраничного вывода:
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 100,
+    # настройка для фильтрации:
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
+
 # следующие 2 настройки используются для camelCase
 # !!! ВКЛЮЧАТЬ ТОЛЬКО КОГДА НЕ НУЖНА HTML ФОРМА ДЛЯ РУЧНОГО ВНЕСЕНИЯ ДАННЫХ !!!
 #     'DEFAULT_PARSER_CLASSES': (
