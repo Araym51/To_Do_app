@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # подключенные библиотеки
     'rest_framework',
+    'django_filters', # фильтрация
     'corsheaders', # библиотека для взаимодействия с frontend
     # мои приложения
     'users_app',

@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter, SimpleRouter
 from users_app.views import UsersModelViewSet
-from projects.views import ProjectModelViewSet, ToDoModelViewSet
+from projects.views import ProjectModelViewSet, ToDoModelViewSet, ProjectDjangoFilterViewSet, ToDoDjangoFilterViewSet
 
 
 router = DefaultRouter()
@@ -25,6 +25,8 @@ router = DefaultRouter()
 router.register('users', UsersModelViewSet)
 router.register('projects', ProjectModelViewSet)
 router.register('to_do', ToDoModelViewSet)
+router.register('project_filter', ProjectDjangoFilterViewSet)
+router.register('todo_filter', ToDoDjangoFilterViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls), # подключена админка
