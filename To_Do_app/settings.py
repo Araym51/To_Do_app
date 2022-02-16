@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'corsheaders', # библиотека для взаимодействия с frontend
     # мои приложения
     'users_app',
+    'projects',
 ]
 
 MIDDLEWARE = [
@@ -139,3 +140,31 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
     'http://127.0.0.1:3000', # для предотвращения проблем на ubuntu
 ]
+
+# настрока renderers для всего проекта:
+# REST_FRAMEWORK = {
+#     'DEFAULT_RENDERER_CLASSES': [
+#         'rest_framework.renderers.JSONRenderer',
+#         'rest_framework.renderers.BrowsableAPIRenderer',
+#     ],
+# }
+
+# настрока renderers для всего проекта:
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+        # используется camelCase:
+        'djangorestframework_camel_case.render.CamelCaseJSONRenderer',
+        'djangorestframework_camel_case.render.CamelCaseBrowsableAPIRenderer',
+    ),
+# следующие 2 настройки используются для camelCase
+# !!! ВКЛЮЧАТЬ ТОЛЬКО КОГДА НЕ НУЖНА HTML ФОРМА ДЛЯ РУЧНОГО ВНЕСЕНИЯ ДАННЫХ !!!
+#     'DEFAULT_PARSER_CLASSES': (
+#         'djangorestframework_camel_case.parser.CamelCaseJSONParser',
+#     ),
+#     'JSON_UNDERSCOREIZE': {
+#         'no_underscore_before_number': True,
+#     },
+}
+
