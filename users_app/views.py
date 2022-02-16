@@ -1,4 +1,4 @@
-from rest_framework.mixins import ListModelMixin, UpdateModelMixin
+from rest_framework.mixins import ListModelMixin, UpdateModelMixin, RetrieveModelMixin
 from rest_framework.renderers import JSONRenderer, BrowsableAPIRenderer
 from rest_framework.viewsets import ModelViewSet, GenericViewSet
 from .models import Users
@@ -14,7 +14,7 @@ class UsersModelViewSet(ModelViewSet):
     pagination_class = UsersLimitOffsetPagination # установлен вывод 10 записей на страницу
 
 
-class UsersCustomViewSet(ListModelMixin, UpdateModelMixin, GenericViewSet):
+class UsersCustomViewSet(ListModelMixin, UpdateModelMixin, RetrieveModelMixin, GenericViewSet):
     """
     есть возможность просмотра списка и каждого пользователя в отдельности,
     можно вносить изменения, нельзя удалять и создавать

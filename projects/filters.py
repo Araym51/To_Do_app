@@ -14,7 +14,8 @@ class ProjectFilter(filters.FilterSet):
 
 class ToDoFilter(filters.FilterSet):
     # добавить фильтрацию по проекту
+    created_at = filters.DateFromToRangeFilter()
 
     class Meta:
         model = ToDo
-        fields = ['project']
+        fields = ['project', 'created_at']

@@ -5,6 +5,7 @@ from .serializers import ToDoModelSerializer, ProjectModelSerializer
 from .pagination import ProjectLimitOffsetPagination, ToDoLimitOffsetPagination
 from .filters import ProjectFilter, ToDoFilter
 from rest_framework.renderers import JSONRenderer, BrowsableAPIRenderer
+from rest_framework import status
 
 
 # Create your views here.
@@ -41,3 +42,13 @@ class ToDoDjangoFilterViewSet(ModelViewSet):
     serializer_class = ToDoModelSerializer
     filterset_class = ToDoFilter
     pagination_class = ToDoLimitOffsetPagination
+
+    def destroy(self, request, *args, **kwargs):
+        try:
+            instance = self.get_object()
+            instance.is_active = False
+            instance.save()
+        except:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        else:
+            return Response(status=status.HTTP_204_NO_CONTENT)

@@ -33,7 +33,7 @@ class ToDo(models.Model):
     users = models.ForeignKey(users_app.models.Users, on_delete=models.CASCADE)
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)
-    is_open = models.BooleanField(default=True)
+    is_active = models.BooleanField(default=True)
 
     def __str__(self):
         return f'{self.project} | {self.note_text} | {self.users} | {self.created_at} | {self.updated_at}'
