@@ -34,14 +34,14 @@ class ProjectDjangoFilterViewSet(ModelViewSet):
     queryset = Project.objects.all()
     serializer_class = ProjectModelSerializer
     filterset_class = ProjectFilter
-    pagination_class = ProjectLimitOffsetPagination
+    # pagination_class = ProjectLimitOffsetPagination # ! при включении падает отрисовка фронтэндом !
 
 
 class ToDoDjangoFilterViewSet(ModelViewSet):
     queryset = ToDo.objects.all()
     serializer_class = ToDoModelSerializer
     filterset_class = ToDoFilter
-    pagination_class = ToDoLimitOffsetPagination
+    # pagination_class = ToDoLimitOffsetPagination # ! при включении падает отрисовка фронтэндом !
 
     def destroy(self, request, *args, **kwargs):
         try:

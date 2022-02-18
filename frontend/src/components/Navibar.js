@@ -8,9 +8,9 @@ export function NaviBar() {
             <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="mr-auto">
-                    <Nav.Link >Home</Nav.Link>
                     <Nav.Link >Users</Nav.Link>
-                    <Nav.Link >About</Nav.Link>
+                    <Nav.Link >Projects</Nav.Link>
+                    <Nav.Link >ToDo</Nav.Link>
                 </Nav>
                 {/*<Nav>*/}
                 {/*    <Button variant="primary" className="mr-2">Авторизация</Button>*/}

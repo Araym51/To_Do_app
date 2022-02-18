@@ -23,11 +23,11 @@ from projects.views import ProjectModelViewSet, ToDoModelViewSet, ProjectDjangoF
 router = DefaultRouter()
 # router = SimpleRouter()
 # router.register('users', UsersModelViewSet)
-router.register('users_custom', UsersCustomViewSet)
+router.register('users', UsersCustomViewSet)
 # router.register('projects', ProjectModelViewSet)
 # router.register('to_do', ToDoModelViewSet)
-router.register('project_filter', ProjectDjangoFilterViewSet)
-router.register('todo_filter', ToDoDjangoFilterViewSet)
+router.register('project', ProjectDjangoFilterViewSet)
+router.register('todo', ToDoDjangoFilterViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls), # подключена админка
