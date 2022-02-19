@@ -2,6 +2,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from "react";
 import axios from "axios";
+import {BrowserRouter, HashRouter, Route, Switch} from "react-router-dom";
 // my apps:
 import UsersList from "./components/Users";
 import ToDoList from "./components/ToDo";
@@ -9,6 +10,7 @@ import ProjectList from "./components/Projects";
 // components:
 import {NaviBar} from "./components/Navibar";
 import {Footer} from "./components/Footer";
+
 
 
 const DOMAIN = 'http://127.0.0.1:8000/api/'
@@ -57,10 +59,17 @@ class App extends React.Component {
     render() {
         return (
             <div>
-                <NaviBar/>
-                <UsersList users_list={this.state.users_list}/>
-                <ToDoList todo_list={this.state.todo_list} />
-                <ProjectList project_list={this.state.project_list} />
+                <BrowserRouter>
+                    <NaviBar/>
+                    <Switch>
+                        <Route path='/users/'
+                               component={() => <UsersList users_list={this.state.users_list}/>}/>
+                        <Route exact path='/todo/'
+                               component={() => <ToDoList todo_list={this.state.todo_list}/>}/>
+                        <Route exact path='/project/'
+                               component={() => <ProjectList project_list={this.state.project_list}/>}/>
+                    </Switch>
+                </BrowserRouter>
                 <Footer/>
             </div>
         )

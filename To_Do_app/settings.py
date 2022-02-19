@@ -161,6 +161,7 @@ REST_FRAMEWORK = {
 
     ),
     # настройки для постраничного вывода:
+    # !!! ВКЛЮЧАТЬ КОГДА НЕ НУЖЕН FRONTEND !!!
     # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     # 'PAGE_SIZE': 100,
     # настройка для фильтрации:
