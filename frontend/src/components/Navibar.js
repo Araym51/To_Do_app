@@ -13,12 +13,6 @@ export function NaviBar() {
                         <Nav.Link><Link to='/todo/'>To Do </Link></Nav.Link>
                         <Nav.Link><Link to='/project/'>Projects </Link></Nav.Link>
                     </Nav>
-                {/*<Nav className="mr-auto">*/}
-                {/*    <Nav.Link >Users</Nav.Link>*/}
-                {/*    <Nav.Link >Projects</Nav.Link>*/}
-                {/*    <Nav.Link >ToDo</Nav.Link>*/}
-                {/*</Nav>*/}
-                {/*<Nav>*/}
                 {/*    <Button variant="primary" className="mr-2">Авторизация</Button>*/}
                 {/*    <Button variant="primary" className="mr-2">Выход</Button>*/}
                 {/*</Nav>*/}

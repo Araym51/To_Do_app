@@ -6,7 +6,8 @@ import {BrowserRouter, HashRouter, Route, Switch} from "react-router-dom";
 // my apps:
 import UsersList from "./components/Users";
 import ToDoList from "./components/ToDo";
-import ProjectList from "./components/Projects";
+import {ProjectDetail, ProjectList} from "./components/Projects";
+import NotFound404 from "./components/NotFound404";
 // components:
 import {NaviBar} from "./components/Navibar";
 import {Footer} from "./components/Footer";
@@ -23,7 +24,17 @@ class App extends React.Component {
             'users_list': [],
             'todo_list': [],
             'project_list': [],
+            'project_detail': {}
         }
+    }
+
+    getProject(id) {
+        // console.log('call')
+        // console.log(get_url(`/api/projects/${id}`))
+        axios.get(get_url(`project/${id}`))
+            .then(response => {
+                this.setState({project_detail: response.data})
+            }).catch(error => console.log(error))
     }
 
     componentDidMount() {
@@ -68,6 +79,9 @@ class App extends React.Component {
                                component={() => <ToDoList todo_list={this.state.todo_list}/>}/>
                         <Route exact path='/project/'
                                component={() => <ProjectList project_list={this.state.project_list}/>}/>
+                            <Route path="/project/:id" children={<ProjectDetail getProject={(id) => this.getProject(id)}
+                                                                                item={this.state.project_detail}/>}/>
+                        <Route component={NotFound404}/>
                     </Switch>
                 </BrowserRouter>
                 <Footer/>

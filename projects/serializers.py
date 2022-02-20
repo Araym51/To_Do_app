@@ -8,7 +8,7 @@ class ProjectModelSerializer(ModelSerializer):
     # users = serializers.StringRelatedField(many=True) # !ВКЛЮЧАТЬ КОГДА НЕ НУЖНО РАБОТАТЬ С HTML ФОРМОЙ!
     class Meta:
         model = Project
-        fields = ('project', 'git_link', 'is_active', 'users')
+        fields = '__all__' # ('id', 'project', 'git_link', 'is_active', 'users')
         # read_only_fields = ('users',)
 
 
