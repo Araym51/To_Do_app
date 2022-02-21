@@ -31,10 +31,14 @@ class App extends React.Component {
     getProject(id) {
         // console.log('call')
         // console.log(get_url(`/api/projects/${id}`))
-        axios.get(get_url(`project/${id}`))
+        axios.get(get_url(`project/${id}/`))
             .then(response => {
                 this.setState({project_detail: response.data})
             }).catch(error => console.log(error))
+        //Разобраться, почему постоянно запрашивает данные:
+        // Error: Network Error
+        //     at createError (createError.js:17:1)
+        //     at XMLHttpRequest.handleError (xhr.js:123:1)
     }
 
     componentDidMount() {
@@ -79,7 +83,7 @@ class App extends React.Component {
                                component={() => <ToDoList todo_list={this.state.todo_list}/>}/>
                         <Route exact path='/project/'
                                component={() => <ProjectList project_list={this.state.project_list}/>}/>
-                            <Route path="/project/:id" children={<ProjectDetail getProject={(id) => this.getProject(id)}
+                            <Route path="/project/:id/" children={<ProjectDetail getProject={(id) => this.getProject(id)}
                                                                                 item={this.state.project_detail}/>}/>
                         <Route component={NotFound404}/>
                     </Switch>
