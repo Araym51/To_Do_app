@@ -184,7 +184,8 @@ REST_FRAMEWORK = {
     ],
     # система прав:
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated', # только для авторизованных пользователей
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+        # 'rest_framework.permissions.IsAuthenticated', # все права только для авторизованных пользователей
     ],
 }
 
