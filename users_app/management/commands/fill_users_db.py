@@ -13,45 +13,54 @@ def load_from_json(file_name):
         return json.load(db_file)
 
 
-def user_gen(num):
-    """
-    Генерирует заданное количество пользователей
-    :param num: нужное число пользователей
-    :return: возвращается список пользователей
-    """
-    users_list = []
-    while num > 0:
-        num -= 1
-        data = []
-        data.append(f'username{num}')
-        data.append(f'user{num}_firstname')
-        data.append(f'user{num}_lastname')
-        data.append(f'user{num}@mail.ru')
-        users_list.append(data)
-    return users_list
+# def user_gen(num):
+#     """
+#     Генерирует заданное количество пользователей
+#     :param num: нужное число пользователей
+#     :return: возвращается список пользователей
+#     """
+#     users_list = []
+#     while num > 0:
+#         num -= 1
+#         data = []
+#         data.append(f'username{num}')
+#         data.append(f'user{num}_firstname')
+#         data.append(f'user{num}_lastname')
+#         data.append(f'user{num}@mail.ru')
+#         users_list.append(data)
+#     return users_list
 
 
 class Command(BaseCommand):
+
+    help = 'Создание суперпользователя и пользователей'
+
+    def add_arguments(self, parser):
+        """
+        Задает нужное количество сгенерированных пользователей
+        :param parser: число нужных пользователей
+        """
+        parser.add_argument('count', type=int)
+
     def handle(self, *args, **options):
+
+        Users.objects.all().delete()
+
         # создаем суперпользователя:
         Users.objects.create_superuser(username='araym', email='araimo@yandex.ru', password='z1mbabva',
                                        first_name='Egor', last_name='Ostroumov')
 
         # генерируем список с нужным количеством пользователей
-        generated_users = user_gen(20)
+        # generated_users = user_gen(20)
         # заполняем базу данных новыми пользователями
-        for user_name, first_name, last_name, user_email in generated_users:
-            Users.objects.create_user(username=user_name, email=user_email, first_name=first_name, last_name=last_name,
-                                      password='zaq12wsx')
+        # for user_name, first_name, last_name, user_email in generated_users:
+        #     Users.objects.create_user(username=user_name, email=user_email, first_name=first_name, last_name=last_name,
+        #                               password='zaq12wsx')
 
-        """
-        разобраться, почему не добавляются данные при загрузке по скрипту?
-        Вероятно проблема в связанности данных
-        """
-        # users = load_from_json('users_app/fixtures/db.json')
-        # Users.objects.all().delete()
-        # for user in users:
-        #     get_user = user.get('fields')
-        #     get_user['id'] = user.get('pk')
-        #     new_user = Users(**get_user)
-        #     new_user.save()
+        user_count = options['count']
+        # заполняем базу данных тестовыми пользователями
+        for i in range(user_count):
+            Users.objects.create_user(username=f'user_{i}', email=f'test_user_{i}@mail.ru', first_name=f'user_{i}_name',
+                                      last_name=f'user_{i}_lastname', password=f'zaq12wsx{i}')
+
+        print('test users succefully created')

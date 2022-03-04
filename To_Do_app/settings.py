@@ -41,8 +41,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # подключенные библиотеки
     'rest_framework',
+    'django_filters', # фильтрация
+    'corsheaders', # библиотека для взаимодействия с frontend
+    'rest_framework.authtoken', # авторизация по токену
     # мои приложения
     'users_app',
+    'projects',
 ]
 
 MIDDLEWARE = [
@@ -53,6 +57,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # библиотека для взаимодействия с frontend
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'To_Do_app.urls'
@@ -129,3 +136,56 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# адрес с которого идет взаимодействие с frontend
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',
+    'http://127.0.0.1:3000', # для предотвращения проблем на ubuntu
+]
+
+# настрока renderers для всего проекта:
+# REST_FRAMEWORK = {
+#     'DEFAULT_RENDERER_CLASSES': [
+#         'rest_framework.renderers.JSONRenderer',
+#         'rest_framework.renderers.BrowsableAPIRenderer',
+#     ],
+# }
+
+# настрока renderers для всего проекта:
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+        # используется camelCase:
+        'djangorestframework_camel_case.render.CamelCaseJSONRenderer',
+        'djangorestframework_camel_case.render.CamelCaseBrowsableAPIRenderer',
+
+    ),
+    # настройки для постраничного вывода:
+    # !!! ВКЛЮЧАТЬ КОГДА НЕ НУЖЕН FRONTEND !!!
+    # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    # 'PAGE_SIZE': 100,
+    # настройка для фильтрации:
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
+
+# следующие 2 настройки используются для camelCase
+# !!! ВКЛЮЧАТЬ ТОЛЬКО КОГДА НЕ НУЖНА HTML ФОРМА ДЛЯ РУЧНОГО ВНЕСЕНИЯ ДАННЫХ !!!
+    'DEFAULT_PARSER_CLASSES': (
+        'djangorestframework_camel_case.parser.CamelCaseJSONParser',
+    ),
+    'JSON_UNDERSCOREIZE': {
+        'no_underscore_before_number': True,
+    },
+    # система авторизации:
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+    # система прав:
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+        # 'rest_framework.permissions.IsAuthenticated', # все права только для авторизованных пользователей
+    ],
+}
+
