@@ -3,7 +3,6 @@ import {Button, Nav, Navbar} from "react-bootstrap";
 import {Link} from "react-router-dom";
 
 
-
 export function NaviBar() {
     return (
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -14,9 +13,10 @@ export function NaviBar() {
                     <Nav.Link><Link to='/users/'>Users </Link></Nav.Link>
                     <Nav.Link><Link to='/todo/'>To Do </Link></Nav.Link>
                     <Nav.Link><Link to='/project/'>Projects </Link></Nav.Link>
-                    {/*{this.is_auth() ? <button onClick={() => this.logout()}>Logout<button>*/}
-                        <Nav.Link><Link to='/login/'>Login</Link></Nav.Link>
-                            {/*}*/}
+                    <Nav.Link>
+                        {this.is_auth() ? <Button variant="dark" onClick={() => this.logout()}>Logout</Button> :
+                            <Button variant="dark"><Link to='/login/'>Login</Link></Button>}
+                    </Nav.Link>}
                 </Nav>
             </Navbar.Collapse>
         </Navbar>
