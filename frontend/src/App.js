@@ -30,6 +30,7 @@ class App extends React.Component {
             'project_list': [],
             'project_detail': {},
             'token': '',
+            'auth' : {username: '', is_login: false},
         }
     }
 
@@ -79,6 +80,7 @@ class App extends React.Component {
         })
     }
 
+    //проверка авторизации по наличию токена:
     is_auth() {
         return !!this.state.token
     }
@@ -94,19 +96,27 @@ class App extends React.Component {
         // document.cookie = `token=${token}`
     }
 
+    //собираем токен из cookies
     get_token_from_cookies() {
         const cookies = new Cookies()
         const token = cookies.get('token')
         this.setState({'token': token}, () => this.load_data())
     }
 
+    // собираем токен и имя пользователя:
     get_token(username, password) {
         axios.post('http://127.0.0.1:8000/api-token-auth/', {
             username: username, password: password
         }).then(response => {
             // console.log(response.data['token'])
             this.set_token(response.data['token'])
-        }).catch(error => console.log(error))
+        }).catch(error => {
+            if (error.response.status === 401) {
+                alert('Неверный логин или пароль')
+            }else {
+                console.log(error)
+            }
+        })
         // console.log('data= ' + username, password)
     }
 
@@ -124,6 +134,10 @@ class App extends React.Component {
 
         this.get_token_from_cookies()
         // this.load_data()
+        const username = localStorage.getItem('login')
+        if ((username != "") & (username != null)) {
+            this.setState({'auth': {username: username, is_login: true}}, () => this.load_data())
+        }
 
     }
 
@@ -145,6 +159,7 @@ class App extends React.Component {
                                     {this.is_auth() ? <Button variant="dark" onClick={() => this.logout()}>Logout</Button> :
                                         <Button variant="dark"><Link to='/login/'>Login</Link></Button>}
                                 </Nav.Link>}
+                                {/*Todo: разобраться как в bootstrap нормально впихивать JS. Или использовать чистый html*/}
                             </Nav>
                         </Navbar.Collapse>
                     </Navbar>
