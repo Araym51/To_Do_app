@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_filters', # фильтрация
     'corsheaders', # библиотека для взаимодействия с frontend
+    'rest_framework.authtoken', # авторизация по токену
     # мои приложения
     'users_app',
     'projects',
@@ -175,5 +176,16 @@ REST_FRAMEWORK = {
     'JSON_UNDERSCOREIZE': {
         'no_underscore_before_number': True,
     },
+    # система авторизации:
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+    # система прав:
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+        # 'rest_framework.permissions.IsAuthenticated', # все права только для авторизованных пользователей
+    ],
 }
 
