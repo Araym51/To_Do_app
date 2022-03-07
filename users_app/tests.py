@@ -40,6 +40,22 @@ class TestUserViewSet(TestCase):
         response = view(request)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
+    # тест падает, так как по тех заданию, UsersCustomViewSet не имеет возможности создавать и удалять данные.
+    # def test_create_guest(self):
+    #     factory = APIRequestFactory()
+    #     request = factory.post(self.url, self.data, format='json')
+    #     view = UsersCustomViewSet.as_view({'post': 'create'})
+    #     response = view(request)
+    #     self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+    # тест падает, так как по тех заданию, UsersCustomViewSet не имеет возможности создавать и удалять данные.
+    # def test_create_admin(self):
+    #     factory = APIRequestFactory()
+    #     request = factory.post(self.url, self.data, format='json')
+    #     force_authenticate(request, self.admin)
+    #     view = UsersCustomViewSet.as_view({'post': 'create'})
+    #     response = view(request)
+    #     self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
 
     def tearDown(self) -> None:
