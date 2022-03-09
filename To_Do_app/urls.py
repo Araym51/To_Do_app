@@ -23,7 +23,7 @@ from rest_framework.authtoken import views
 router = DefaultRouter()
 # router = SimpleRouter()
 # router.register('users', UsersModelViewSet)
-# router.register('projects', ProjectModelViewSet)
+# router.register('project', ProjectModelViewSet)
 # router.register('to_do', ToDoModelViewSet)
 router.register('users', UsersCustomViewSet)
 router.register('project', ProjectDjangoFilterViewSet)
