@@ -3,6 +3,7 @@ from requests import request
 from rest_framework import status
 from rest_framework.test import APIRequestFactory, force_authenticate, APIClient, APISimpleTestCase, APITestCase
 from mixer.backend.django import mixer
+import json
 
 from users_app.models import Users
 from users_app.views import UsersModelViewSet
@@ -93,7 +94,7 @@ class TestProjectViewSet(TestCase):
         pass
 
 
-class TestToDoViewSet(TestCase):
+class TestToDoViewSet(APITestCase):
 
     def setUp(self) -> None:
         self.name = 'araym'
@@ -122,18 +123,19 @@ class TestToDoViewSet(TestCase):
 
     def test_todo_get_detail(self):
         client = APIClient()
-        todo = ToDo.objects.create(**self.data)
-        response = client.get(f'{self.url}{todo.id}/')
+        todo = mixer.blend(ToDo)
+        response = client.get(f'/api/todo/{todo.id}/')
+        print(f'test_todo_get_detail: {response}')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     #415!
     def test_todo_put_admin(self):
-        client = APIClient()
         todo = mixer.blend(ToDo)
-        client.login(username=self.name, password=self.password)
-        response = client.put(f'{self.url_todo}{todo.id}/', {'note_text': 'some text'})
+        self.client.login(username=self.name, password=self.password)
+        response = self.client.put(f'{self.url_todo}{todo.id}/', {'note_text': 'some text'})
+        print(f'test_todo_put_admin: {response}')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        client.logout()
+        self.client.logout()
 
 
     def tearDown(self) -> None:
