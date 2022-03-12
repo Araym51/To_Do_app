@@ -130,9 +130,12 @@ class TestToDoViewSet(APITestCase):
 
     #415!
     def test_todo_put_admin(self):
-        todo = mixer.blend(ToDo)
+        user = mixer.blend(Users)
+        project = mixer.blend(Project)
+        todo = mixer.blend(ToDo, user=user.id)
         self.client.login(username=self.name, password=self.password)
-        response = self.client.put(f'{self.url_todo}{todo.id}/', {'note_text': 'some text'})
+        put_data =json.dumps({'project': todo.project.id, 'note_text': 'some text', 'users': user.id, 'is_active': False})
+        response = self.client.put(f'/api/todo/{todo.id}/', put_data, content_type='application/json')
         print(f'test_todo_put_admin: {response}')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.client.logout()
