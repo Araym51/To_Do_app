@@ -31,7 +31,7 @@ class ToDoModelViewSet(ModelViewSet):
 
 # фильтрация:
 class ProjectDjangoFilterViewSet(ModelViewSet):
-    renderer_classes = [JSONRenderer]
+    renderer_classes = [BrowsableAPIRenderer]
     queryset = Project.objects.all()
     serializer_class = ProjectModelSerializer
     filterset_class = ProjectFilter
@@ -39,7 +39,7 @@ class ProjectDjangoFilterViewSet(ModelViewSet):
 
 
 class ToDoDjangoFilterViewSet(ModelViewSet):
-    renderer_classes = [JSONRenderer]
+    renderer_classes = [BrowsableAPIRenderer]
     queryset = ToDo.objects.all()
     serializer_class = ToDoModelSerializer
     filterset_class = ToDoFilter
