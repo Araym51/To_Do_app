@@ -63,7 +63,7 @@ class TestProjectViewSet(TestCase):
         self.client.logout()
 
     def test_project_patch_mixer(self):
-        project = mixer.blend(Project, project='tes')
+        project = mixer.blend(Project, project='check!')
         self.client.login(username=self.name, password=self.password)
         response = self.client.patch(f'{self.url_project}{project.id}/', {'git_link': 'https://github.com/Araym51'},
                                      content_type='application/json')
@@ -86,15 +86,18 @@ class TestToDoViewSet(TestCase):
         self.url_todo = '/api/todo/'
         self.url_users = '/api/users/'
         self.admin = Users.objects.create_superuser(self.name, self.email, self.password)
-
-    def test_todo_create_admin(self):
-        # создаем админа:
-        factory = APIRequestFactory()
-        request = factory.post(self.url_users, self.users, format='json')
-        force_authenticate(request, self.admin)
-        view = UsersModelViewSet.as_view({'post': 'create'})
-        response = view(request)
-        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.todo_data = {
+            "note_text": "Skill give sometimes foot reduce. Building wonder address listen.",
+            "is_active": True,
+            "project": 1,
+            "users": 1
+        }
+        self.todo_put = {
+            "note_text": "Done here!",
+            "is_active": False,
+            "project": 1,
+            "users": 1
+        }
 
     def test_get_todo_list(self):
         response = self.client.get(self.url_todo)
@@ -106,16 +109,27 @@ class TestToDoViewSet(TestCase):
         response = client.get(f'/api/todo/{todo.id}/')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-    #обнаружена ошибка в моделях, объект не создается. Todo: ИСПРАВИТЬ!
-    def test_patch_todo_data(self):
-        todo = mixer.blend(ToDo, note_text='aaaa!')
-        print(f'todo data: {todo}')
+    def test_patch_note(self):
+        todo = mixer.blend(ToDo, note_text='check!')
         self.client.login(username=self.name, password=self.password)
-        response = self.client.patch(f'{self.url_todo}{todo.id}', {'note_text': 'yeaaa!'}, content_type='application/json')
+        response = self.client.patch(f'{self.url_todo}{todo.id}/', {'note_text': 'suxcess!'},
+                                     content_type='application/json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        # todo_ = todo.objects.get(id=todo.id)
-        # self.assertEqual(todo_.note_text, 'yeaaa!')
+        todo_ = ToDo.objects.get(id=todo.id)
+        self.assertEqual(todo_.note_text, 'suxcess!')
         self.client.logout()
+
+    def test_put_note(self):
+        data = mixer.blend(ToDo, note_text='Hey!')
+        self.client.login(username=self.name, password=self.password)
+        response = self.client.put(f'{self.url_todo}{data.id}/', self.todo_put, content_type='application/json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        data_ = ToDo.objects.get(id=data.id)
+        self.assertEqual(data_.note_text, "Done here!")
+        self.assertEqual(data_.is_active, False)
+        self.client.logout()
+
+
 
     def tearDown(self) -> None:
         pass

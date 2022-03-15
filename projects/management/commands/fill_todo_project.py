@@ -13,6 +13,6 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         records_count = options['count']
         for i in range(records_count):
-            # mixer.blend(Project)
+            mixer.blend(Project)
             mixer.blend(ToDo)
         print('ToDo & Project заполнены тестовыми записями')

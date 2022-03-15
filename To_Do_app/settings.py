@@ -183,9 +183,9 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
     ],
     # система прав:
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-        # 'rest_framework.permissions.IsAuthenticated', # все права только для авторизованных пользователей
-    ],
+    # 'DEFAULT_PERMISSION_CLASSES': [
+    #     'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    #     # 'rest_framework.permissions.IsAuthenticated', # все права только для авторизованных пользователей
+    # ],
 }
 

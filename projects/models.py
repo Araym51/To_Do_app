@@ -1,7 +1,7 @@
 from django.db import models
 
 # Create your models here.
-import users_app.models
+from users_app.models import Users
 
 """
 подумать, куда лучше записать created/updated at
@@ -17,7 +17,7 @@ class Project(models.Model):
     project = models.CharField(verbose_name='Название проекта', max_length=128)
     git_link = models.URLField(verbose_name='Ссылка на git')
     is_active = models.BooleanField(default=True)
-    users = models.ManyToManyField(users_app.models.Users)
+    users = models.ManyToManyField(Users)
 
 
 class ToDo(models.Model):
@@ -30,10 +30,10 @@ class ToDo(models.Model):
     """
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
     note_text = models.TextField(verbose_name='Описание заметки')
-    users = models.ForeignKey(users_app.models.Users, on_delete=models.CASCADE)
+    users = models.ForeignKey(Users, on_delete=models.PROTECT, null=True)
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
-        return f'{self.project} | {self.note_text} | {self.users} | {self.created_at} | {self.updated_at}'
+        return self.note_text
