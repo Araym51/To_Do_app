@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'django_filters', # фильтрация
     'corsheaders', # библиотека для взаимодействия с frontend
     'rest_framework.authtoken', # авторизация по токену
+    'django.contrib.staticfiles', # для css/js swagger
+    'drf_yasg', # авто документация
     # мои приложения
     'users_app',
     'projects',
