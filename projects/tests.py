@@ -50,21 +50,14 @@ class TestProjectViewSet(TestCase):
         response = client.get(f'{self.url_project} {projects.id}/')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-    # Разобраться, почему тут 415 ошибка:
     def test_project_put_object(self):
         client = APIClient()
         projects = Project.objects.create(**self.data)
         client.login(username=self.name, password=self.password)
         response = client.put(f'{self.url_project}{projects.id}/', self.data_put)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-
-        # project_ = Project.objects.get(id=projects.id)
-        # self.assertEqual(project_.project, self.data_put.get('test'))
-        # self.assertEqual(project_.git_link, self.data_put.get('git.com/proj_1'))
-
         client.logout()
 
-    # тоже ошибка 415:
     def test_project_put_mixer(self):
         projects = mixer.blend(Project)
         self.client.login(username=self.name, password=self.password)
@@ -75,7 +68,6 @@ class TestProjectViewSet(TestCase):
         self.assertEqual(projects_.git_link, 'https://github.com/Araym51')
         self.client.logout()
 
-    # тоже ошибка 415:
     def test_project_put_mixer_fields(self):
         projects = mixer.blend(Project)
         self.client.login(username=self.name, password=self.password)
@@ -87,8 +79,6 @@ class TestProjectViewSet(TestCase):
         self.assertEqual(projects_.git_link, 'https://github.com/Araym51')
         self.assertEqual(projects_.is_active, False)
         self.client.logout()
-
-
 
     def tearDown(self) -> None:
         pass
@@ -128,10 +118,8 @@ class TestToDoViewSet(APITestCase):
         print(f'test_todo_get_detail: {response}')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-    #415!
     def test_todo_put_admin(self):
         user = mixer.blend(Users)
-        project = mixer.blend(Project)
         todo = mixer.blend(ToDo, user=user.id)
         self.client.login(username=self.name, password=self.password)
         put_data =json.dumps({'project': todo.project.id, 'note_text': 'some text', 'users': user.id, 'is_active': False})
