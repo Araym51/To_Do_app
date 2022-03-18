@@ -6,4 +6,5 @@ class UsersModelSerializer(ModelSerializer):
     class Meta:
         model = Users
         # поля которые мы хотим отображать:
-        fields = ('username', 'first_name', 'last_name', 'email')
+        # fields = ('username', 'first_name', 'last_name', 'email')
+        fields = '__all__'
