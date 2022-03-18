@@ -16,15 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter, SimpleRouter
-from users_app.views import UsersModelViewSet, UsersCustomViewSet
+from users_app.views import UsersCustomViewSet
 from projects.views import ProjectModelViewSet, ToDoModelViewSet, ProjectDjangoFilterViewSet, ToDoDjangoFilterViewSet
 from rest_framework.authtoken import views
 
 router = DefaultRouter()
-# router = SimpleRouter()
-# router.register('users', UsersModelViewSet)
-# router.register('project', ProjectModelViewSet)
-# router.register('to_do', ToDoModelViewSet)
+
 router.register('users', UsersCustomViewSet)
 router.register('project', ProjectDjangoFilterViewSet)
 router.register('todo', ToDoDjangoFilterViewSet)
@@ -33,5 +30,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),  # подключена админка
     path('api-auth/', include('rest_framework.urls')),
     path('api/', include(router.urls)),
-    path('api-token-auth/', views.obtain_auth_token), # токен для авторизации
+    path('api-token-auth/', views.obtain_auth_token),  # токен для авторизации
 ]

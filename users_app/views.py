@@ -2,7 +2,7 @@ from rest_framework.mixins import ListModelMixin, UpdateModelMixin, RetrieveMode
 from rest_framework.renderers import JSONRenderer, BrowsableAPIRenderer
 from rest_framework.viewsets import ModelViewSet, GenericViewSet
 from .models import Users
-from .serializers import UsersModelSerializer
+from .serializers import UsersModelSerializer, UsersAdminModelSerializer
 from .pagination import UsersLimitOffsetPagination
 # Create your views here.
 
@@ -21,5 +21,9 @@ class UsersCustomViewSet(ListModelMixin, UpdateModelMixin, RetrieveModelMixin, G
     """
     renderer_classes = [JSONRenderer, BrowsableAPIRenderer]
     queryset = Users.objects.all()
-    serializer_class = UsersModelSerializer
     pagination_classes = UsersLimitOffsetPagination
+
+    def get_serializer_class(self):
+        if self.request.version == 'v2':
+            return UsersModelSerializer
+        return UsersAdminModelSerializer
