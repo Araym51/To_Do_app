@@ -13,8 +13,9 @@ class ProjectModelSerializer(ModelSerializer):
 
 
 class ToDoModelSerializer(ModelSerializer):
-    project = serializers.StringRelatedField() # !ВКЛЮЧАТЬ КОГДА НЕ НУЖНО РАБОТАТЬ С HTML ФОРМОЙ!
-    users = UsersModelSerializer() # !ВКЛЮЧАТЬ КОГДА НЕ НУЖНО РАБОТАТЬ С HTML ФОРМОЙ!
+    # project = serializers.StringRelatedField() # !ВКЛЮЧАТЬ КОГДА НЕ НУЖНО РАБОТАТЬ С HTML ФОРМОЙ!
+    # users = UsersModelSerializer() # !ВКЛЮЧАТЬ КОГДА НЕ НУЖНО РАБОТАТЬ С HTML ФОРМОЙ!
+    # users = serializers.StringRelatedField()
     class Meta:
         model = ToDo
         fields = '__all__'
