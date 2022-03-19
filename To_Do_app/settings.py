@@ -17,7 +17,6 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
@@ -29,7 +28,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -38,12 +36,13 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
+    'django.contrib.staticfiles',  # для css/js swagger
     # подключенные библиотеки
     'rest_framework',
-    'django_filters', # фильтрация
-    'corsheaders', # библиотека для взаимодействия с frontend
-    'rest_framework.authtoken', # авторизация по токену
+    'django_filters',  # фильтрация
+    'corsheaders',  # библиотека для взаимодействия с frontend
+    'rest_framework.authtoken',  # авторизация по токену
+    'drf_yasg',  # авто документация
     # мои приложения
     'users_app',
     'projects',
@@ -95,7 +94,6 @@ DATABASES = {
     }
 }
 
-
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
@@ -114,7 +112,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
@@ -125,7 +122,6 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
@@ -140,7 +136,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # адрес с которого идет взаимодействие с frontend
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
-    'http://127.0.0.1:3000', # для предотвращения проблем на ubuntu
+    'http://127.0.0.1:3000',  # для предотвращения проблем на ubuntu
 ]
 
 # настрока renderers для всего проекта:
@@ -168,8 +164,8 @@ REST_FRAMEWORK = {
     # настройка для фильтрации:
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
 
-# следующие 2 настройки используются для camelCase
-# !!! ВКЛЮЧАТЬ ТОЛЬКО КОГДА НЕ НУЖНА HTML ФОРМА ДЛЯ РУЧНОГО ВНЕСЕНИЯ ДАННЫХ !!!
+    # следующие 2 настройки используются для camelCase
+    # !!! ВКЛЮЧАТЬ ТОЛЬКО КОГДА НЕ НУЖНА HTML ФОРМА ДЛЯ РУЧНОГО ВНЕСЕНИЯ ДАННЫХ !!!
     'DEFAULT_PARSER_CLASSES': (
         'djangorestframework_camel_case.parser.CamelCaseJSONParser',
     ),
@@ -183,9 +179,11 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
     ],
     # система прав:
-    # 'DEFAULT_PERMISSION_CLASSES': [
-    #     'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-    #     # 'rest_framework.permissions.IsAuthenticated', # все права только для авторизованных пользователей
-    # ],
-}
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+        # 'rest_framework.permissions.IsAuthenticated', # все права только для авторизованных пользователей
+    ],
+    'DEFAULT_VERSIONING_CLASS':
+        'rest_framework.versioning.QueryParameterVersioning',
 
+}
