@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'corsheaders',  # библиотека для взаимодействия с frontend
     'rest_framework.authtoken',  # авторизация по токену
     'drf_yasg',  # авто документация
-    'graphene_django' # библиотека для работы с GraphQL (pip install graphene-django)
+    'graphene_django', # библиотека для работы с GraphQL (pip install graphene-django)
     # мои приложения
     'users_app',
     'projects',
