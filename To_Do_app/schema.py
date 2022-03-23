@@ -30,12 +30,46 @@ class Query(graphene.ObjectType):
     to_do = graphene.List(ToDoType)
 
     def resolve_users(root, info):
+        """ пример запроса для users:
+        {users{
+            username
+            firstName
+            lastName
+            email
+            }
+        }"""
         return Users.objects.all()
 
     def resolve_projects(root, info):
+        """пример запроса для project:
+        {projects{
+            project
+            gitLink
+            isActive
+            users{
+                username
+                }
+            }
+        }"""
         return Project.objects.all()
 
     def resolve_to_do(root, info):
+        """пример запроса для todo:
+            {toDo
+                {
+                    id
+                    project {
+                            project
+                            }
+                    noteText
+                    users {
+                            username
+                            }
+                    createdAt
+                    updatedAt
+                    isActive
+                }
+            }"""
         return ToDo.objects.all()
 
 
