@@ -28,6 +28,9 @@ class Query(graphene.ObjectType):
     users = graphene.List(UsersType)
     projects = graphene.List(ProjectType)
     to_do = graphene.List(ToDoType)
+    projects_id = graphene.Field(ProjectType, id=graphene.Int())
+    to_do_id = graphene.Field(ToDoType, id=graphene.Int())
+
 
     def resolve_users(root, info):
         """ пример запроса для users:
@@ -39,6 +42,7 @@ class Query(graphene.ObjectType):
             }
         }"""
         return Users.objects.all()
+
 
     def resolve_projects(root, info):
         """пример запроса для project:
@@ -52,6 +56,7 @@ class Query(graphene.ObjectType):
             }
         }"""
         return Project.objects.all()
+
 
     def resolve_to_do(root, info):
         """пример запроса для todo:
@@ -71,6 +76,46 @@ class Query(graphene.ObjectType):
                 }
             }"""
         return ToDo.objects.all()
+
+
+    def resolve_projects_id(root, info, id=None):
+        """пример запроса:{
+            projectsId(id:1){
+                id
+                project
+                gitLink
+                isActive
+                users{
+                    username
+                }
+            }
+        }"""
+        try:
+            return Project.objects.get(id=id)
+        except Project.DoesNotExist:
+            return None
+
+
+    def resolve_to_do_id(root, info, id=None):
+        """пример запроса: {
+        toDoId(id:1){
+            project{
+                project
+                }
+            noteText
+            users{
+                username
+                }
+            createdAt
+            updatedAt
+            isActive
+            }
+        }"""
+        try:
+            return ToDo.objects.get(id=id)
+        except ToDo.DoesNotExist:
+            return None
+
 
 
 schema = graphene.Schema(query=Query)
