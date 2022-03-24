@@ -3,12 +3,14 @@ import graphene
 from projects.models import Project, ToDo
 from users_app.models import Users
 from .types import UsersType, ProjectType, ToDoType
+from .mutations import Mutations
 
 
 class Query(graphene.ObjectType):
     users = graphene.List(UsersType)
     projects = graphene.List(ProjectType)
     to_do = graphene.List(ToDoType)
+    users_id = graphene.List(UsersType)
     projects_id = graphene.Field(ProjectType, id=graphene.Int())
     to_do_id = graphene.Field(ToDoType, id=graphene.Int())
 
@@ -59,6 +61,13 @@ class Query(graphene.ObjectType):
         return ToDo.objects.all()
 
 
+    def resolve_users_id(root, info, id=None):
+        try:
+            return Users.objects.get(id=id)
+        except Users.DoesNotExists:
+            return None
+
+
     def resolve_projects_id(root, info, id=None):
         """пример запроса:{
             projectsId(id:1){
@@ -98,5 +107,4 @@ class Query(graphene.ObjectType):
             return None
 
 
-
-schema = graphene.Schema(query=Query)
+schema = graphene.Schema(query=Query, mutation=Mutations)
