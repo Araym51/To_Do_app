@@ -190,5 +190,5 @@ REST_FRAMEWORK = {
 
 #работа с GraphQL:
 GRAPHENE = {
-    'SCHEMA': 'To_Do_app.schema.schema',
+    'SCHEMA': 'schemas.schema.schema',
 }
