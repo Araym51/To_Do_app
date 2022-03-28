@@ -4,15 +4,15 @@ import "./styles/navibar.css"
 
 export function Navibar() {
     return (
-        <HashRouter>
         <ul>
-            <li><Link to='/'><a class="active">Home</a></Link></li>
-            {/*<li><Link to='login/'><a>Login</a></Link></li>*/}
-            <li><Link to='users/'><a>Users</a></Link></li>
-            <li><Link to='projects/'><a>Projects</a></Link></li>
-            <li><Link to='todo/'><a>To do notes</a></Link></li>
-        </ul>
+            <HashRouter>
+                <li><Link to='/'>Home</Link></li>
+                {/*<li><Link to='login/'><a>Login</a></Link></li>*/}
+                <li><Link to='users/'>Users</Link></li>
+                <li><Link to='projects/'>Projects</Link></li>
+                <li><Link to='todo/'>To do notes</Link></li>
             </HashRouter>
+        </ul>
     )
 }
 

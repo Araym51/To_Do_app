@@ -1,5 +1,5 @@
 import './App.css';
-import {HashRouter, Route} from "react-router-dom";
+import {BrowserRouter, HashRouter, Route, Switch,} from "react-router-dom";
 //my apps:
 import Navibar from "./components/Navibar";
 import UsersList from "./components/Users";
@@ -13,14 +13,16 @@ function App() {
 
     return (
         <div>
-            <HashRouter>
-                <Navibar/>
-                <Route exact path='/' component={() => <Home/>}/>
-                <Route exact path='users/' component={() => <UsersList/>}/>
-                <Route exact path='projects/' component={() => <ProjectList/>}/>
-                <Route exact path='todo/' component={() => <ToDoList/>}/>
-                <Route component={NotFound404}/>
-            </HashRouter>
+            <Navibar/>
+            <BrowserRouter>
+                <Switch>
+                    <Route exact path='/' component={() => <Home/>}/>
+                    <Route exact path='/users/' component={() => <UsersList/>}/>
+                    <Route exact path='/projects/' component={() => <ProjectList/>}/>
+                    <Route exact path='/todo/' component={() => <ToDoList/>}/>
+                    <Route component={NotFound404}/>
+                </Switch>
+            </BrowserRouter>
         </div>
     );
 }
