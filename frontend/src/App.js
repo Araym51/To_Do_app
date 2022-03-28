@@ -4,6 +4,7 @@ import './App.css';
 import Navibar from "./components/Navibar";
 import UsersList from "./components/Users";
 import ProjectList from "./components/Projects";
+import ToDoList from "./components/ToDo";
 
 
 function App() {
@@ -11,8 +12,9 @@ function App() {
     return (
         <div>
             <Navibar/>
-            {/*<UsersList/>*/}
+            <UsersList/>
             <ProjectList/>
+            <ToDoList/>
         </div>
     );
 }
