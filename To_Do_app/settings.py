@@ -36,13 +36,14 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',  # для css/js swagger
+    'django.contrib.staticfiles',  # для css/js, swagger, graphql
     # подключенные библиотеки
-    'rest_framework',
+    'rest_framework', # django rest framework - для работы через api
     'django_filters',  # фильтрация
     'corsheaders',  # библиотека для взаимодействия с frontend
     'rest_framework.authtoken',  # авторизация по токену
     'drf_yasg',  # авто документация
+    'graphene_django', # библиотека для работы с GraphQL (pip install graphene-django)
     # мои приложения
     'users_app',
     'projects',
@@ -186,4 +187,9 @@ REST_FRAMEWORK = {
     'DEFAULT_VERSIONING_CLASS':
         'rest_framework.versioning.QueryParameterVersioning',
 
+}
+
+#работа с GraphQL:
+GRAPHENE = {
+    'SCHEMA': 'schemas.schema.schema',
 }

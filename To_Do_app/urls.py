@@ -15,12 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from graphene_django.views import GraphQLView
 from rest_framework import permissions
 from rest_framework.routers import DefaultRouter, SimpleRouter
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 from users_app.views import UsersCustomViewSet
-from projects.views import ProjectModelViewSet, ToDoModelViewSet, ProjectDjangoFilterViewSet, ToDoDjangoFilterViewSet
+from projects.views import ProjectDjangoFilterViewSet, ToDoDjangoFilterViewSet
 from rest_framework.authtoken import views
 
 schema_view = get_schema_view(
@@ -48,5 +49,5 @@ urlpatterns = [
     path('api-token-auth/', views.obtain_auth_token),  # токен для авторизации
     path('swagger/',schema_view.with_ui('swagger')),
     path('redoc/',schema_view.with_ui('redoc')),
+    path('graphql/', GraphQLView.as_view(graphiql=True)),
 ]
-
