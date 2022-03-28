@@ -3,10 +3,9 @@ import {useQuery} from "@apollo/client";
 import {GET_ALL_USERS} from "../query/users";
 
 
-const UsersList = ({users_list}) => {
+const UsersList = () => {
     const {data, loading, error} = useQuery(GET_ALL_USERS)
     const [users, setUsers] = useState([])
-    console.log(data)
 
     useEffect(() => {
         if (!loading) {
