@@ -3,3 +3,4 @@ node install -g npx
 в корне фронтэнда:
 npm install axios
 npm install @apollo/client graphql
+npm install react-router-dom

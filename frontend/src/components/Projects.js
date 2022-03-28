@@ -18,14 +18,14 @@ const ProjectList = () => {
         <table>
             <th>Project</th>
             <th>Git Link</th>
-            <th>Active</th>
             <th>User</th>
+            <th>Active</th>
             {project.map(projects =>
                 <tr>
                     <td>{projects.project}</td>
                     <td>{projects.gitLink}</td>
-                    <td>{projects.isActive}</td>
                     <td>{projects.users.username}</td>
+                    <td>{projects.isActive}</td>
                 </tr>
             )}
         </table>)

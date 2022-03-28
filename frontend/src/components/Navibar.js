@@ -1,14 +1,18 @@
 import React from "react";
+import {HashRouter, Link} from "react-router-dom";
 import "./styles/navibar.css"
 
 export function Navibar() {
     return (
+        <HashRouter>
         <ul>
-            <li><a class="active" href="">Home</a></li>
-            <li><a href="">Users</a></li>
-            <li><a href="">Projects</a></li>
-            <li><a href="">To do notes</a></li>
+            <li><Link to='/'><a class="active">Home</a></Link></li>
+            {/*<li><Link to='login/'><a>Login</a></Link></li>*/}
+            <li><Link to='users/'><a>Users</a></Link></li>
+            <li><Link to='projects/'><a>Projects</a></Link></li>
+            <li><Link to='todo/'><a>To do notes</a></Link></li>
         </ul>
+            </HashRouter>
     )
 }
 
