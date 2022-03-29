@@ -1,5 +1,5 @@
 import './App.css';
-import {BrowserRouter, HashRouter, Route, Switch,} from "react-router-dom";
+import {Route, Switch, BrowserRouter,} from "react-router-dom";
 //my apps:
 import Navibar from "./components/Navibar";
 import UsersList from "./components/Users";
@@ -17,9 +17,9 @@ function App() {
             <BrowserRouter>
                 <Switch>
                     <Route exact path='/' component={() => <Home/>}/>
-                    <Route exact path='/users/' component={() => <UsersList/>}/>
-                    <Route exact path='/projects/' component={() => <ProjectList/>}/>
-                    <Route exact path='/todo/' component={() => <ToDoList/>}/>
+                    <Route exact path='/users' component={() => <UsersList/>}/>
+                    <Route exact path='/projects' component={() => <ProjectList/>}/>
+                    <Route exact path='/todo' component={() => <ToDoList/>}/>
                     <Route component={NotFound404}/>
                 </Switch>
             </BrowserRouter>
