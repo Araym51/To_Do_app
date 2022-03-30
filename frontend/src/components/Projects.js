@@ -20,12 +20,14 @@ const ProjectList = () => {
             <th>Git Link</th>
             <th>User</th>
             <th>Active</th>
+            <th>Details</th>
             {project.map(projects =>
                 <tr>
                     <td>{projects.project}</td>
                     <td>{projects.gitLink}</td>
                     <td>{projects.users.username}</td>
                     <td>{projects.isActive}</td>
+                    <td><a href={`/projects/${projects.id}`}>Details</a> </td>
                 </tr>
             )}
         </table>)
