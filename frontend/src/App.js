@@ -16,6 +16,7 @@ import NotFound404 from "./components/NotFound404";
 // import {Footer} from "./components/Footer";
 import LoginForm from "./components/Auth";
 import {Button, Nav, Navbar} from "react-bootstrap";
+import ProjectForm from "./components/Project_form";
 
 
 const DOMAIN = 'http://127.0.0.1:8000/api/'
@@ -34,9 +35,20 @@ class App extends React.Component {
         }
     }
 
-    createProject(id) {
+    createProject(project, users, git_link) {
 
+        const headers = this.get_headers()
+        const data = {project: project, users: users, git_link: git_link}
+        axios.post('http://127.0.0.1:8000/api/project/', data, {headers}).then(
+            response => {
+                this.load_data()
+            }
+        ).catch(error => {
+            console.log(error)
+            this.setState({project_list: []})
+        })
     }
+
 
     deleteProject(id) {
         const headers = this.get_headers()
@@ -46,6 +58,19 @@ class App extends React.Component {
             this.setState({'project_list': []})
         )
     }
+
+    createToDo() {
+
+    }
+
+    // deleteToDo(id) {
+    //     const headers = this.get_headers()
+    //     axios.delete(get_url(`todo/${id}`, {headers})).then(response => {
+    //         this.load_data()
+    //     }).catch(error =>
+    //         this.setState({'todo_list': []})
+    //     )
+    // }
 
 
     getProject(id) {
@@ -170,10 +195,14 @@ class App extends React.Component {
                         <Route path='/users/'
                                component={() => <UsersList users_list={this.state.users_list}/>}/>
                         <Route exact path='/todo/'
-                               component={() => <ToDoList todo_list={this.state.todo_list}/>}/>
+                               component={() => <ToDoList todo_list={this.state.todo_list}
+                                                          deleteToDo={(id) => this.deleteToDo(id)}/>}/>
                         <Route exact path='/project/'
                                component={() => <ProjectList project_list={this.state.project_list}
                                                              deleteProject={(id) => this.deleteProject(id)}/>}/>
+                        <Route exact path='project/create'
+                               component={() => <ProjectForm project_list={this.state.project_list}
+                                                             createProject={(project, users, git_link) => this.createProject(project, users, git_link)}/>}/>
                         <Route path="/project/:id/" children={<ProjectDetail getProject={(id) => this.getProject(id)}
                                                                              item={this.state.project_detail}/>}/>
                         <Route component={NotFound404}/>

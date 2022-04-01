@@ -4,7 +4,7 @@ import {Link, useParams} from "react-router-dom";
 
 const ProjectItem = ({project_item, deleteProject}) => {
     let link_to_detail = `/project/${project_item.id}`
-    return(
+    return (
         <tr>
             <td>{project_item.id}</td>
             <td>{project_item.project}</td>
@@ -12,22 +12,28 @@ const ProjectItem = ({project_item, deleteProject}) => {
             <td>{project_item.is_active}</td>
             <td>{project_item.users}</td>
             <td><Link to={link_to_detail}>Details</Link></td>
-            <td><button onClick={()=>deleteProject(project_item.id)} type='button'>Delete</button></td>
+            <td>
+                <button onClick={() => deleteProject(project_item.id)} type='button'>Delete</button>
+            </td>
         </tr>
     )
 }
 
 const ProjectList = ({project_list, deleteProject}) => {
     return (
-        <Table striped bordered hover>
-            <td>id</td>
-            <th>Project name</th>
-            <th>Link to git</th>
-            <th>Active</th>
-            <th>Users</th>
-            <th>Details</th>
-            {project_list.map((project_item) => <ProjectItem project_item={project_item} deleteProject={deleteProject}/>)}
-        </Table>
+        <Link>
+            <Link to='projects/create'>New Project</Link>
+            <Table striped bordered hover>
+                <td>id</td>
+                <th>Project name</th>
+                <th>Link to git</th>
+                <th>Active</th>
+                <th>Users</th>
+                <th>Details</th>
+                {project_list.map((project_item) => <ProjectItem project_item={project_item}
+                                                                 deleteProject={deleteProject}/>)}
+            </Table>
+        </div>
     )
 }
 
