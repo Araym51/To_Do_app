@@ -30,21 +30,29 @@ class App extends React.Component {
             'project_list': [],
             'project_detail': {},
             'token': '',
-            'auth' : {username: '', is_login: false},
+            'auth': {username: '', is_login: false},
         }
     }
 
+    createProject(id) {
+
+    }
+
+    deleteProject(id) {
+        const headers = this.get_headers()
+        axios.delete(get_url(`project/${id}/`), {headers}).then(response => {
+            this.load_data()
+        }).catch(error =>
+            this.setState({'project_list': []})
+        )
+    }
+
+
     getProject(id) {
-        // console.log('call')
-        // console.log(get_url(`/api/projects/${id}`))
         axios.get(get_url(`project/${id}/`))
             .then(response => {
                 this.setState({project_detail: response.data})
             }).catch(error => console.log(error))
-        //Разобраться, почему постоянно запрашивает данные:
-        // Error: Network Error
-        //     at createError (createError.js:17:1)
-        //     at XMLHttpRequest.handleError (xhr.js:123:1)
     }
 
     logout() {
@@ -91,9 +99,6 @@ class App extends React.Component {
         const cookies = new Cookies()
         cookies.set('token', token)
         this.setState({'token': token}, () => this.load_data())
-        // localStorage.setItem('token', token)
-        // let token_ = localStorage.getItem('token')
-        // document.cookie = `token=${token}`
     }
 
     //собираем токен из cookies
@@ -108,16 +113,14 @@ class App extends React.Component {
         axios.post('http://127.0.0.1:8000/api-token-auth/', {
             username: username, password: password
         }).then(response => {
-            // console.log(response.data['token'])
             this.set_token(response.data['token'])
         }).catch(error => {
             if (error.response.status === 401) {
                 alert('Неверный логин или пароль')
-            }else {
+            } else {
                 console.log(error)
             }
         })
-        // console.log('data= ' + username, password)
     }
 
     get_headers() {
@@ -133,7 +136,6 @@ class App extends React.Component {
     componentDidMount() {
 
         this.get_token_from_cookies()
-        // this.load_data()
         const username = localStorage.getItem('login')
         if ((username != "") & (username != null)) {
             this.setState({'auth': {username: username, is_login: true}}, () => this.load_data())
@@ -145,8 +147,6 @@ class App extends React.Component {
         return (
             <div>
                 <BrowserRouter>
-                    {/*<NaviBar/>*/}
-                    {/*navbar пока так:*/}
                     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
                         <Navbar.Brand>To do app</Navbar.Brand>
                         <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
@@ -156,10 +156,10 @@ class App extends React.Component {
                                 <Nav.Link><Link to='/todo/'>To Do </Link></Nav.Link>
                                 <Nav.Link><Link to='/project/'>Projects </Link></Nav.Link>
                                 <Nav.Link>
-                                    {this.is_auth() ? <Button variant="dark" onClick={() => this.logout()}>Logout</Button> :
+                                    {this.is_auth() ?
+                                        <Button variant="dark" onClick={() => this.logout()}>Logout</Button> :
                                         <Button variant="dark"><Link to='/login/'>Login</Link></Button>}
                                 </Nav.Link>}
-                                {/*Todo: разобраться как в bootstrap нормально впихивать JS. Или использовать чистый html*/}
                             </Nav>
                         </Navbar.Collapse>
                     </Navbar>
@@ -172,13 +172,13 @@ class App extends React.Component {
                         <Route exact path='/todo/'
                                component={() => <ToDoList todo_list={this.state.todo_list}/>}/>
                         <Route exact path='/project/'
-                               component={() => <ProjectList project_list={this.state.project_list}/>}/>
+                               component={() => <ProjectList project_list={this.state.project_list}
+                                                             deleteProject={(id) => this.deleteProject(id)}/>}/>
                         <Route path="/project/:id/" children={<ProjectDetail getProject={(id) => this.getProject(id)}
                                                                              item={this.state.project_detail}/>}/>
                         <Route component={NotFound404}/>
                     </Switch>
                 </BrowserRouter>
-                {/*<Footer/>*/}
             </div>
         )
     }

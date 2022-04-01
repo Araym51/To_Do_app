@@ -2,7 +2,7 @@ import React from "react";
 import {Table} from "react-bootstrap";
 import {Link, useParams} from "react-router-dom";
 
-const ProjectItem = ({project_item}) => {
+const ProjectItem = ({project_item, deleteProject}) => {
     let link_to_detail = `/project/${project_item.id}`
     return(
         <tr>
@@ -12,11 +12,12 @@ const ProjectItem = ({project_item}) => {
             <td>{project_item.is_active}</td>
             <td>{project_item.users}</td>
             <td><Link to={link_to_detail}>Details</Link></td>
+            <td><button onClick={()=>deleteProject(project_item.id)} type='button'>Delete</button></td>
         </tr>
     )
 }
 
-const ProjectList = ({project_list}) => {
+const ProjectList = ({project_list, deleteProject}) => {
     return (
         <Table striped bordered hover>
             <td>id</td>
@@ -25,7 +26,7 @@ const ProjectList = ({project_list}) => {
             <th>Active</th>
             <th>Users</th>
             <th>Details</th>
-            {project_list.map((project_item) => <ProjectItem project_item={project_item} />)}
+            {project_list.map((project_item) => <ProjectItem project_item={project_item} deleteProject={deleteProject}/>)}
         </Table>
     )
 }

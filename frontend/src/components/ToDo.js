@@ -6,7 +6,7 @@ const ToDoItem = ({todo}) => {
         <tr>
             <td>{todo.project}</td>
             <td>{todo.note_text}</td>
-            <td>{todo.users}</td>
+            {/*<td>{todo.users}</td> пересмотреть сериализатор*/}
             <td>{todo.created_at}</td>
             <td>{todo.updated_at}</td>
             <td>{todo.is_active}</td>
@@ -17,24 +17,12 @@ const ToDoItem = ({todo}) => {
 const ToDoList = ({todo_list}) => {
     return (
         <Table striped bordered hover>
-            <th>
-                Project name
-            </th>
-            <th>
-                Note text
-            </th>
-            <th>
-                User
-            </th>
-            <th>
-                Created
-            </th>
-            <th>
-                Updated
-            </th>
-            <th>
-                Active
-            </th>
+            <th>Project name</th>
+            <th>Note text</th>
+            {/*<th>User</th>*/}
+            <th>Created</th>
+            <th>Updated</th>
+            <th>Active</th>
             {todo_list.map((todo) => <ToDoItem todo={todo} /> )}
         </Table>
     )
