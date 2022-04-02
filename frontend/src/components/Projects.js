@@ -14,6 +14,7 @@ const ProjectList = () => {
     if (loading) {
         return <h1>Loading...</h1>
     }
+    if (error) return `Error! ${error}`
     return (
         <table>
             <th>Project</th>

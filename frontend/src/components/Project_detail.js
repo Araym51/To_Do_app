@@ -6,19 +6,22 @@ import {GET_PROJECT_DETAIL} from "../query/projects";
 const ProjectDetail = ({getProject, item}) =>{
     let {id} = useParams()
     getProject(id)
-    // const {data, loading, error} = useQuery(GET_PROJECT_DETAIL, {
-    //     variables:{
-    //         id: {id}
-    //     }
-    // })
-    // console.log('data=', data)
+    const {data: items, loading, error} = useQuery(GET_PROJECT_DETAIL, {
+        variables:{
+            id: `${id}`
+        }
+    });
+    if (loading) return null;
+    if (error) return `Error! ${error}`
+    console.log('data=', items)
 
     return(
         <div>
-            <h1>{item.project}</h1>
+            <h1>{items.projectsId.project}</h1>
             <p></p>
-            Repository: <a href={item.git_link}>{item.git_link}</a>
-
+            Repository: <a href={items.projectsId.gitLink}>{items.projectsId.gitLink}</a>
+            <p></p>
+            Active: {items.projectsId.isActive}
         </div>
     )
 

@@ -11,8 +11,8 @@ class Query(graphene.ObjectType):
     projects = graphene.List(ProjectType)
     to_do = graphene.List(ToDoType)
     users_id = graphene.List(UsersType)
-    projects_id = graphene.Field(ProjectType, id=graphene.Int())
-    to_do_id = graphene.Field(ToDoType, id=graphene.Int())
+    projects_id = graphene.Field(ProjectType, id=graphene.ID())
+    to_do_id = graphene.Field(ToDoType, id=graphene.ID())
 
 
     def resolve_users(root, info):
