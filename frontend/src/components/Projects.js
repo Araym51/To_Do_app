@@ -2,8 +2,8 @@ import React, {useEffect, useState} from "react";
 import {useQuery} from "@apollo/client";
 import {GET_ALL_PROJECTS} from "../query/projects";
 
-const ProjectList = () => {
-    const {data, loading, error} = useQuery(GET_ALL_PROJECTS)
+const ProjectList = (headers) => {
+    const {data, loading, error} = useQuery(GET_ALL_PROJECTS, {headers})
     const [project, setProjects] = useState([])
 
     useEffect(() => {

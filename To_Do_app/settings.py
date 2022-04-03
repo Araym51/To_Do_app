@@ -179,10 +179,10 @@ REST_FRAMEWORK = {
     #     'rest_framework.authentication.SessionAuthentication',
     #     'rest_framework.authentication.TokenAuthentication',
     # ],
-    # система прав: todo: включи обратно когда логин на фронте настроишь
+    # система прав (включать только один из них): todo: включи обратно когда логин на фронте настроишь
     # 'DEFAULT_PERMISSION_CLASSES': [
-    #     'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-        # 'rest_framework.permissions.IsAuthenticated', # все права только для авторизованных пользователей
+    #     # 'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    #     'rest_framework.permissions.IsAuthenticated', # все права только для авторизованных пользователей
     # ],
     'DEFAULT_VERSIONING_CLASS':
         'rest_framework.versioning.QueryParameterVersioning',
