@@ -24,23 +24,23 @@ class App extends React.Component {
         }
     }
 
-    is_aut(){
+    is_aut() {
         return !!this.state.token
     }
 
     //уствновка токена
-    set_token(token){
+    set_token(token) {
         const cookies = new Cookies()
         cookies.set('token', token)
-        this.setState({'token': token}, ()=> this.get_headers())
+        this.setState({'token': token}, () => this.get_headers())
         console.log(this.state.token)
     }
 
     // получение токена из куков
-    get_token_from_cookies(){
+    get_token_from_cookies() {
         const cookies = new Cookies()
-        const token =  cookies.get('token')
-        this.setState({'token': token}, ()=> this.get_headers())
+        const token = cookies.get('token')
+        this.setState({'token': token}, () => this.get_headers())
     }
 
     //получение токена
@@ -49,16 +49,18 @@ class App extends React.Component {
             {username: username, password: password}
         ).then(response => {
             this.set_token(response.data['token'])
-            }).catch(error=> console.log(error))
+            this.setState({'auth': {username: username, is_login: true}})
+            localStorage.setItem('login', username)
+        }).catch(error => console.log(error))
     }
 
-    get_headers(){
+    get_headers() {
         console.log('test')
         let headers = {
-            'Content-Type':'application/json'
+            'Content-Type': 'application/json'
         }
         console.log(this.is_aut())
-        if(this.is_aut()){
+        if (this.is_aut()) {
             console.log(`Token ${this.state.token}`)
             headers['Authorization'] = `Token ${this.state.token}`
         }
@@ -73,18 +75,22 @@ class App extends React.Component {
 
     }
 
+    logout() {
+        localStorage.setItem('login', '')
+        this.setState({'auth': {username: '', is_login: false}})
+        this.set_token('')
+        console.log('LOGOUT!')
+    }
+
     componentDidMount() {
         this.get_token_from_cookies()
-        const username = localStorage.getItem('login')
-        if ((username != "") & (username != null)){
-            this.setState({'auth':{'username':username, is_login: true}})
-        }
+
     }
 
     render() {
         return (
             <div>
-                <Navibar/>
+                <Navibar logout={() => this.state.logout()}/>
                 <BrowserRouter>
                     <Switch>
                         <Route exact path='/' component={() => <Home/>}/>
