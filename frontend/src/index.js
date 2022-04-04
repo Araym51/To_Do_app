@@ -5,13 +5,15 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {ApolloClient, ApolloProvider, createHttpLink, InMemoryCache} from "@apollo/client";
 import {setContext} from "@apollo/client/link/context";
+import Cookies from "universal-cookie/es6";
 
 const httpLink = createHttpLink({
     uri: 'http://127.0.0.1:8000/graphql/'
 })
 
 const authLink = setContext((_, {headers}) => {
-    const token = localStorage.getItem('token');
+    const cookies = new Cookies()
+    const token =  cookies.get('token')
     console.log('index got token:', token)
     return {
         headers:{
