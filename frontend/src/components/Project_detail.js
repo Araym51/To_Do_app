@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import {useQuery} from "@apollo/client";
-import {GET_PROJECT_DETAIL} from "../query/projects";
+import {GET_PROJECT_DETAIL, UPDATE_PROJECT} from "../query/projects";
 
 const ProjectDetail = ({getProject, item}) =>{
     let {id} = useParams()
@@ -25,6 +25,19 @@ const ProjectDetail = ({getProject, item}) =>{
         </div>
     )
 
+}
+
+const UpdateProject = ({getProject}) => {
+    let {id} = useParams()
+    getProject(id)
+    const {data: update, loading: loadingUpdate, error} = useQuery(UPDATE_PROJECT, {
+        variables:{
+            id:`${id}`
+        }
+    })
+    if (loadingUpdate) return null;
+    if (error) return `Error! ${error}`
+    console.log('data=', update)
 }
 
 export default ProjectDetail

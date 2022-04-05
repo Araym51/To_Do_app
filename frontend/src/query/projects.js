@@ -25,3 +25,15 @@ query projectsId($id: ID){
         }
     }
 `
+
+export const UPDATE_PROJECT = gql`
+            mutation updateProject($id: ID, $gitLink: String!, isActive: $Boolean){
+                updateProject(id:$id, gitLink:$gitLink, isActive:$isActive){
+                    projects{
+                        project
+                        id
+                        gitLink
+                        isActive
+                    }
+                }
+            }`

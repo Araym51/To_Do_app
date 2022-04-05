@@ -19,7 +19,6 @@ class App extends React.Component {
         super(props)
         this.state = {
             'project_detail': {},
-            'auth': {username: '', is_login: false},
             'token': '',
         }
     }
@@ -49,7 +48,6 @@ class App extends React.Component {
             {username: username, password: password}
         ).then(response => {
             this.set_token(response.data['token'])
-            this.setState({'auth': {username: username, is_login: true}})
             localStorage.setItem('login', username)
         }).catch(error => console.log(error))
     }
@@ -77,7 +75,6 @@ class App extends React.Component {
 
     logout() {
         localStorage.setItem('login', '')
-        this.setState({'auth': {username: '', is_login: false}})
         this.set_token('')
         console.log('LOGOUT!')
     }
@@ -90,7 +87,8 @@ class App extends React.Component {
     render() {
         return (
             <div>
-                <Navibar logout={() => this.state.logout()}/>
+                {/*todo: победить logout!*/}
+                <Navibar logout={() => this.logout()}/>
                 <BrowserRouter>
                     <Switch>
                         <Route exact path='/' component={() => <Home/>}/>

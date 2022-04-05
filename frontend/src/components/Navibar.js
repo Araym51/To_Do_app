@@ -4,9 +4,15 @@ import "./styles/navibar.css"
 export function Navibar(logout) {
     let username = localStorage.getItem('login')
     let login_button = ''
-    if (username != '') {
-        login_button = <div><li><a href='/'> Hello {username}!</a></li>
-            <li><button onClick={logout}> Logout </button></li></div>
+    if (username) {
+        login_button = <div>
+            <li>
+                <a href='/'> Hello {username}!</a>
+            </li>
+            <li>
+                <button onClick={logout}> Logout</button>
+            </li>
+        </div>
     } else {
         login_button = <a href='/login'>Login</a>
     }
