@@ -30,7 +30,7 @@ const ProjectDetail = ({getProject, item}) =>{
 const UpdateProject = ({getProject}) => {
     let {id} = useParams()
     getProject(id)
-    const {data: update, loading: loadingUpdate, error} = useQuery(UPDATE_PROJECT, {
+    const [updateProject, {data: update, loading: loadingUpdate, error}] = useQuery(UPDATE_PROJECT, {
         variables:{
             id:`${id}`
         }
@@ -38,6 +38,8 @@ const UpdateProject = ({getProject}) => {
     if (loadingUpdate) return null;
     if (error) return `Error! ${error}`
     console.log('data=', update)
+
+
 }
 
 export default ProjectDetail
