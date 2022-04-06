@@ -53,10 +53,10 @@ class ProjectForm extends React.Component {
                            onChange={(event) => this.handleChange(event)}/>
                 </div>
 
-                <select name="author" multiple onChange={(event) => this.handleUsersChange(event)}>
-                    {this.props.users.map((item) => <option value={item.id}> {item.username} </option>)}
+                {/*<select name="author" multiple onChange={(event) => this.handleUsersChange(event)}>*/}
+                {/*    {this.props.users.map((item) => <option value={item.id}> {item.username} </option>)}*/}
 
-                </select>
+                {/*</select>*/}
 
 
                 <input type="submit" className="btn btn-primary" value="Save"/>

@@ -22,7 +22,7 @@ const ProjectItem = ({project_item, deleteProject}) => {
 const ProjectList = ({project_list, deleteProject}) => {
     return (
         <div>
-            <Link to='projects/create'>New Project</Link>
+            <Link to='/create'>New Project</Link>
             <Table striped bordered hover>
                 <td>id</td>
                 <th>Project name</th>

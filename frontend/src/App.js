@@ -139,6 +139,7 @@ class App extends React.Component {
             username: username, password: password
         }).then(response => {
             this.set_token(response.data['token'])
+            localStorage.setItem('login', username)
         }).catch(error => {
             if (error.response.status === 401) {
                 alert('Неверный логин или пароль')
@@ -200,7 +201,7 @@ class App extends React.Component {
                         <Route exact path='/project/'
                                component={() => <ProjectList project_list={this.state.project_list}
                                                              deleteProject={(id) => this.deleteProject(id)}/>}/>
-                        <Route exact path='project/create'
+                        <Route exact path='/create/'
                                component={() => <ProjectForm project_list={this.state.project_list}
                                                              createProject={(project, users, git_link) => this.createProject(project, users, git_link)}/>}/>
                         <Route path="/project/:id/" children={<ProjectDetail getProject={(id) => this.getProject(id)}
