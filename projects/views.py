@@ -16,7 +16,7 @@ class ProjectModelViewSet(ModelViewSet):
     renderer_classes = [BrowsableAPIRenderer]
     queryset = Project.objects.all()
     serializer_class = ProjectModelSerializer
-    pagination_class = ProjectLimitOffsetPagination # 10 записей
+    # pagination_class = ProjectLimitOffsetPagination # 10 записей
 
 
 class ToDoModelViewSet(ModelViewSet):
@@ -27,7 +27,7 @@ class ToDoModelViewSet(ModelViewSet):
     renderer_classes = [JSONRenderer]
     queryset = ToDo.objects.all()
     serializer_class = ToDoModelSerializer
-    pagination_class = ToDoLimitOffsetPagination # 20 записей
+    # pagination_class = ToDoLimitOffsetPagination # 20 записей
 
 # фильтрация:
 class ProjectDjangoFilterViewSet(ModelViewSet):
