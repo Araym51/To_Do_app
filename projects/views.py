@@ -9,14 +9,14 @@ from rest_framework import status
 
 
 # Create your views here.
-class ProjectModelViewSet(ModelViewSet):
-    """
-    доступны все варианты запросов
-    """
-    renderer_classes = [BrowsableAPIRenderer]
-    queryset = Project.objects.all()
-    serializer_class = ProjectModelSerializer
-    # pagination_class = ProjectLimitOffsetPagination # 10 записей
+# class ProjectModelViewSet(ModelViewSet):
+#     """
+#     доступны все варианты запросов
+#     """
+#     renderer_classes = [BrowsableAPIRenderer]
+#     queryset = Project.objects.all()
+#     serializer_class = ProjectModelSerializer
+#     # pagination_class = ProjectLimitOffsetPagination # 10 записей
 
 
 class ToDoModelViewSet(ModelViewSet):
@@ -31,7 +31,7 @@ class ToDoModelViewSet(ModelViewSet):
 
 # фильтрация:
 class ProjectDjangoFilterViewSet(ModelViewSet):
-    renderer_classes = [JSONRenderer]
+    renderer_classes = [JSONRenderer, BrowsableAPIRenderer]
     queryset = Project.objects.all()
     serializer_class = ProjectModelSerializer
     filterset_class = ProjectFilter

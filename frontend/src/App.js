@@ -39,7 +39,7 @@ class App extends React.Component {
         const headers = this.get_headers()
         const data = {project: project, git_link: git_link}
 
-        axios.post('http://127.0.0.1:8000/api/project', data, {headers}).then(
+        axios.post('http://127.0.0.1:8000/api/project/', data, {headers}).then(
             response => {
                 this.load_data()
             }
@@ -200,9 +200,6 @@ class App extends React.Component {
                         <Route exact path='/project/'
                                component={() => <ProjectList project_list={this.state.project_list}
                                                              deleteProject={(id) => this.deleteProject(id)}/>}/>
-                        {/*<Route exact path='/create/'*/}
-                        {/*       component={() => <ProjectForm project_list={this.state.project_list}*/}
-                        {/*                                     createProject={(project, users, git_link) => this.createProject(project, users, git_link)}/>}/>*/}
                         <Route exact path='/create_project/'
                                component={() => <ProjectForm
                                    createProject={(project, git_link) => this.createProject(project, git_link)}/>}/>
