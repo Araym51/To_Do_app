@@ -145,24 +145,7 @@ class App extends React.Component {
         return (
             <div>
                 <BrowserRouter>
-                    {/*<NaviBar/>*/}
-                    {/*navbar пока так:*/}
-                    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-                        <Navbar.Brand>To do app</Navbar.Brand>
-                        <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
-                        <Navbar.Collapse id="responsive-navbar-nav">
-                            <Nav className="mr-auto">
-                                <Nav.Link><Link to='/users/'>Users </Link></Nav.Link>
-                                <Nav.Link><Link to='/todo/'>To Do </Link></Nav.Link>
-                                <Nav.Link><Link to='/project/'>Projects </Link></Nav.Link>
-                                <Nav.Link>
-                                    {this.is_auth() ? <Button variant="dark" onClick={() => this.logout()}>Logout</Button> :
-                                        <Button variant="dark"><Link to='/login/'>Login</Link></Button>}
-                                </Nav.Link>}
-                                {/*Todo: разобраться как в bootstrap нормально впихивать JS. Или использовать чистый html*/}
-                            </Nav>
-                        </Navbar.Collapse>
-                    </Navbar>
+                    <NaviBar logout={()=>this.logout()}/>
                     <Switch>
                         <Route path='/login/'
                                component={() => <LoginForm
