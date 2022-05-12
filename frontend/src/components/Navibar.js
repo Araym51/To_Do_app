@@ -21,7 +21,7 @@ export function Navibar(logout) {
         <ul>
             <li><a href='/'>Home</a></li>
             <li><a href='/users'>Users</a></li>
-            <li><a href='/projects'>Projects</a></li>
+            <li><a href='/project'>Projects</a></li>
             <li><a href='/todo'>To do notes</a></li>
             <li>{login_button}</li>
 

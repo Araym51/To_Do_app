@@ -13,7 +13,7 @@ class ProjectModelSerializer(ModelSerializer):
 
 
 class ToDoModelSerializer(ModelSerializer):
-    project = serializers.StringRelatedField() # !ВКЛЮЧАТЬ КОГДА НЕ НУЖНО РАБОТАТЬ С HTML ФОРМОЙ!
+    project = ProjectModelSerializer # !ВКЛЮЧАТЬ КОГДА НЕ НУЖНО РАБОТАТЬ С HTML ФОРМОЙ!
     users = UsersModelSerializer() # !ВКЛЮЧАТЬ КОГДА НЕ НУЖНО РАБОТАТЬ С HTML ФОРМОЙ!
     class Meta:
         model = ToDo

@@ -12,7 +12,7 @@ import {ProjectDetail, ProjectList} from "./components/Projects";
 import NotFound404 from "./components/NotFound404";
 
 // components:
-// import {NaviBar} from "./components/Navibar";
+import Navibar from "./components/Navibar";
 // import {Footer} from "./components/Footer";
 import LoginForm from "./components/Auth";
 import {Button, Nav, Navbar} from "react-bootstrap";
@@ -145,7 +145,7 @@ class App extends React.Component {
         return (
             <div>
                 <BrowserRouter>
-                    <NaviBar logout={()=>this.logout()}/>
+                    <Navibar logout={()=>this.logout()}/>
                     <Switch>
                         <Route path='/login/'
                                component={() => <LoginForm
@@ -161,7 +161,6 @@ class App extends React.Component {
                         <Route component={NotFound404}/>
                     </Switch>
                 </BrowserRouter>
-                {/*<Footer/>*/}
             </div>
         )
     }
