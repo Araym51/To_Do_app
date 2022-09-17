@@ -17,7 +17,7 @@ class Project(models.Model):
     project = models.CharField(verbose_name='Название проекта', max_length=128)
     git_link = models.URLField(verbose_name='Ссылка на git')
     is_active = models.BooleanField(default=True)
-    users = models.ManyToManyField(users_app.models.Users)
+    users = models.ForeignKey(users_app.models.Users, on_delete=models.CASCADE)
 
 
 class ToDo(models.Model):
@@ -35,5 +35,6 @@ class ToDo(models.Model):
     updated_at = models.DateField(auto_now=True)
     is_active = models.BooleanField(default=True)
 
+    # а надо ли?
     def __str__(self):
         return f'{self.project} | {self.note_text} | {self.users} | {self.created_at} | {self.updated_at}'

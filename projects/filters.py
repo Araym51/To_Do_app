@@ -11,7 +11,6 @@ class ProjectFilter(filters.FilterSet):
        fields = ['project']
 
 
-
 class ToDoFilter(filters.FilterSet):
     # добавить фильтрацию по проекту
     created_at = filters.DateFromToRangeFilter()
